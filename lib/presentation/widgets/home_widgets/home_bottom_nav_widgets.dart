@@ -1,5 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:task_manager_app/config/app/my_app.dart';
+
+import '../../../core/utils/styles/color/color_manger.dart';
 
 class HomeBottomNavigationWidget extends StatelessWidget {
   final int selectIndex;
@@ -19,9 +23,11 @@ class HomeBottomNavigationWidget extends StatelessWidget {
         Icon(Icons.task_outlined, size: 30),
         Icon(Icons.category_outlined, size: 30),
       ],
-      color: Colors.white,
-      buttonBackgroundColor: Colors.white,
-      backgroundColor: Colors.blueAccent,
+      color: MyApp.isDarkMode ? ColorManager.whiteColor : ColorManager.primary,
+      buttonBackgroundColor:
+          MyApp.isDarkMode ? ColorManager.whiteColor : ColorManager.primary,
+      backgroundColor:
+          MyApp.isDarkMode ? HexColor('333739') : ColorManager.whiteColor,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {
