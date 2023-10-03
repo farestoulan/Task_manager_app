@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manager_app/business_logic/cubit/app_cubit.dart';
+import 'package:task_manager_app/config/app/routes/app_routes.dart';
 import 'package:task_manager_app/config/app/themes/app_thems.dart';
-import '../../presentation/screens/home/home_screen.dart';
+import '../../business_logic/app_cubit/app_cubit.dart';
+import '../../business_logic/app_cubit/app_cubit_state.dart';
 
 class MyApp extends StatelessWidget {
   final bool isDark;
   MyApp(this.isDark);
 
   static bool isDarkMode = false;
-  // static bool isDarkMode = isDark;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
             themeMode: ThemeMode.light,
             // AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-            home: HomeScreen(),
+            onGenerateRoute: AppRoutes.onGenerateRoute,
           );
         },
       ),

@@ -12,7 +12,7 @@ class ColorManager {
   static Color grey3 = const Color(0xff9E9E9E);
   static Color borderCard = const Color(0xffE5E5E5);
 
-  static Color redColor = const Color(0xffD82237);
+  static Color redColor = const Color.fromARGB(255, 199, 68, 83);
   static Color shadowColor = const Color.fromRGBO(241, 241, 241, 1);
   static Color green = const Color(0xff009E5C);
   static Color lightGreen = Color.fromARGB(255, 231, 242, 237);

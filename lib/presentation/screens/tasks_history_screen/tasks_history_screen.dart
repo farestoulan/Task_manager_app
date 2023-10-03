@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manager_app/business_logic/cubit/app_cubit.dart';
 import 'package:task_manager_app/config/app/my_app.dart';
+
+import '../../../business_logic/app_cubit/app_cubit.dart';
+import '../../../business_logic/app_cubit/app_cubit_state.dart';
 
 class TasksHistoryScreen extends StatefulWidget {
   @override

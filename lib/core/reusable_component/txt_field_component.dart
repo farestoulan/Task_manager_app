@@ -37,15 +37,18 @@ class CustomTxtField extends StatelessWidget {
         }
       },
       style: getRegularStyle(
-        fontFamily: AppStrings.gilroy_SemiBold,
+        fontFamily: AppStrings.gilroySemiBold,
         color: ColorManager.blackColor,
-        fontSize: FontSize.s12,
+        fontSize: FontSize.s17,
       ),
       maxLines: maxLiness,
       //   autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       keyboardType: txtInputType,
       decoration: InputDecoration(
+        // icon: Icon(Icons.category_outlined),
+        hintText: AppStrings.hintTyping,
+        labelText: AppStrings.addCategoiesLabel,
         isDense: true,
         filled: true,
         fillColor: ColorManager.grey2,
