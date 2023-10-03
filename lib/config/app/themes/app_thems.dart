@@ -9,6 +9,7 @@ import '../../../core/utils/styles/fonts/style_fonts.dart';
 class AppTheme {
   //
   AppTheme._();
+//=================================== Light Theme Mode
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: ColorManager.whiteColor,
@@ -19,7 +20,7 @@ class AppTheme {
         ),
         titleTextStyle: getMediumStyle(
             color: ColorManager.blackColor,
-            fontFamily: AppStrings.gilroy_Medium,
+            fontFamily: AppStrings.gilroyMedium,
             fontSize: FontSize.s18)),
     // colorScheme: const ColorScheme.light(
     //   primary: Colors.black,
@@ -35,10 +36,10 @@ class AppTheme {
     textTheme: TextTheme(
         titleMedium: getRegularStyle(
       color: Colors.white,
-      fontFamily: AppStrings.gilroy_regular,
+      fontFamily: AppStrings.gilroyRegular,
     )),
   );
-
+//=================================== dark Theme Mode
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: HexColor('333739'),
     appBarTheme: AppBarTheme(
@@ -48,7 +49,7 @@ class AppTheme {
         ),
         titleTextStyle: getMediumStyle(
             color: Colors.white,
-            fontFamily: AppStrings.gilroy_Medium,
+            fontFamily: AppStrings.gilroyMedium,
             fontSize: FontSize.s18)),
     // colorScheme: const ColorScheme.light(
     //   primary: Colors.black,
@@ -64,7 +65,7 @@ class AppTheme {
     textTheme: TextTheme(
         titleMedium: getRegularStyle(
       color: Colors.white,
-      fontFamily: AppStrings.gilroy_regular,
+      fontFamily: AppStrings.gilroyRegular,
     )),
   );
 }
