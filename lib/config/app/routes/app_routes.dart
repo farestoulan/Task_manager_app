@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:task_manager_app/presentation/screens/home/home_screen.dart';
+import 'package:task_manager_app/presentation/screens/tasks_history_screen/tasks_history_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
+
+  static const String tasksHistoryScreen = '/tasksHistoryScreen';
+
+  static const String tasksHomeScreen = '/tasksHomeScreen';
 
 //================================== navigate and Push
   static void navigateTo(context, String namedRouting) => Navigator.pushNamed(
@@ -46,6 +51,21 @@ class AppRoutes {
     switch (routeSettings.name) {
 //======================= inital Screen
       case Routes.initialRoute:
+        return PageTransition(
+          child: HomeScreen(),
+          type: PageTransitionType.leftToRight,
+          settings: routeSettings,
+        );
+//======================= Tasks History Screen
+      case Routes.tasksHistoryScreen:
+        return PageTransition(
+          child: TasksHistoryScreen(),
+          type: PageTransitionType.leftToRight,
+          settings: routeSettings,
+        );
+
+//======================= Tasks History Screen
+      case Routes.tasksHomeScreen:
         return PageTransition(
           child: HomeScreen(),
           type: PageTransitionType.leftToRight,

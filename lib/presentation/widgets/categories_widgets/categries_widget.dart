@@ -23,6 +23,8 @@ class CategoriesWidgets {
           SizedBox(
             width: width / 2.2,
             child: CustomTxtField(
+              hintText: AppStrings.hintTyping,
+              labelText: AppStrings.addCategoiesLabel,
               controller: categoryController,
               emptyErrMsg: 'bbbbb',
               txtInputType: TextInputType.text,
@@ -174,6 +176,8 @@ class CategoriesWidgets {
             width: MediaQuery.of(context).size.width / 1,
             height: MediaQuery.of(context).size.height / 10,
             child: CustomTxtField(
+              hintText: AppStrings.hintTyping,
+              labelText: AppStrings.addCategoiesLabel,
               controller: editController,
               emptyErrMsg: 'tesssst',
               txtInputType: TextInputType.text,

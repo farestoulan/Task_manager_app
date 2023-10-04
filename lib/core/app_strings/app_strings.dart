@@ -34,4 +34,13 @@ class AppStrings {
   static String askRemoveCategory = 'Do you want remove This Category?';
 
   static String noData = 'No Categories';
+
+//===============================
+  static String TaskScreenTitle = 'Add Task';
+
+  static String addTasksLabel = 'Add Task';
+
+  static String hintTypingTask = 'What do you add?';
+
+  static String reminderMe = 'Reminder Me';
 }
