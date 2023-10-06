@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:task_manager_app/data/models/taskes_model/tasks_model.dart';
 import 'package:task_manager_app/presentation/screens/home/home_screen.dart';
 import 'package:task_manager_app/presentation/screens/tasks_history_screen/tasks_history_screen.dart';
+
+import '../../../presentation/screens/splash_screen/splash_screen.dart';
+import '../../../presentation/screens/task_details_screen/task_details_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -9,6 +13,8 @@ class Routes {
   static const String tasksHistoryScreen = '/tasksHistoryScreen';
 
   static const String tasksHomeScreen = '/tasksHomeScreen';
+
+  static const String tasksDetailesScreen = '/tasksDetailesScreen';
 
 //================================== navigate and Push
   static void navigateTo(context, String namedRouting) => Navigator.pushNamed(
@@ -52,10 +58,11 @@ class AppRoutes {
 //======================= inital Screen
       case Routes.initialRoute:
         return PageTransition(
-          child: HomeScreen(),
+          child: SplashScreen(),
           type: PageTransitionType.leftToRight,
           settings: routeSettings,
         );
+
 //======================= Tasks History Screen
       case Routes.tasksHistoryScreen:
         return PageTransition(
@@ -64,10 +71,23 @@ class AppRoutes {
           settings: routeSettings,
         );
 
-//======================= Tasks History Screen
+//======================= Home Screen
       case Routes.tasksHomeScreen:
         return PageTransition(
           child: HomeScreen(),
+          type: PageTransitionType.leftToRight,
+          settings: routeSettings,
+        );
+
+//======================= Tasks Detailes Screen
+
+      case Routes.tasksDetailesScreen:
+        return PageTransition(
+          child: routeSettings.arguments is TasksModel
+              ? TaskDetailsScreen(
+                  tasksModel: routeSettings.arguments as TasksModel,
+                )
+              : TaskDetailsScreen(),
           type: PageTransitionType.leftToRight,
           settings: routeSettings,
         );
@@ -77,6 +97,7 @@ class AppRoutes {
     }
   }
 
+//================================== No Route Found
   static Route<dynamic> undefinedRoute() {
     return MaterialPageRoute(
         builder: ((context) => const Scaffold(

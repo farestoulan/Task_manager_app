@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:task_manager_app/boxes_cach.dart';
 import 'package:task_manager_app/core/network/local/cache_helper.dart';
 import 'package:task_manager_app/data/models/taskes_model/tasks_model.dart';
 import 'config/app/my_app.dart';
@@ -19,9 +18,13 @@ void main() async {
   // Always initialize Awesome Notifications
   await NotificationController.initializeLocalNotifications();
   await NotificationController.initializeIsolateReceivePort();
+  // init Cach
   await CacheHelper.init();
+  //init observer
   Bloc.observer = MyBlocObserver();
+  //init Hive
   await Hive.initFlutter();
+  //init DI injection
   di.initInjector();
 
   Hive.registerAdapter(CategoriesModelAdapter());
@@ -30,12 +33,6 @@ void main() async {
   Hive.registerAdapter(TasksModelAdapter());
   await Hive.openBox<TasksModel>('Tasks');
 
-  final box = Boxes.getTasks();
-  print('box.length${box.length}');
-  print('box.length${box.values.first.reminderDate}');
-  print('box.length${box.values.first.reminderTime}');
-  print('box.length${box.values.first.remindMe}');
-  //print('box.lengthlast${box.values.last.categoryId}');
   bool isDark = CacheHelper.getData(key: 'isDark') ?? false;
 
   SystemChrome.setPreferredOrientations([

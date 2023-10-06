@@ -35,12 +35,32 @@ class AppStrings {
 
   static String noData = 'No Categories';
 
-//===============================
+//=============================== Add Task Screen
   static String TaskScreenTitle = 'Add Task';
 
-  static String addTasksLabel = 'Add Task';
+  static String addTasksLabel = 'Task Title';
 
   static String hintTypingTask = 'What do you add?';
 
-  static String reminderMe = 'Reminder Me';
+  static String reminderMe = 'Remind Me';
+  static String saveLabel = 'Save';
+
+//===================================== Tasks History Screen
+  static String taskTitleLabel = 'Task Title';
+
+  static String taskStatusLabel = 'Task Status';
+
+  static String massageDeletedTask = 'Task Deleted Successfully';
+
+//================================== Task Detailes Screen
+
+  static String taskDetailsTitle = 'Task Details';
+
+  static String selectDateAndTime = 'Reminder Date & Time';
+
+  static String categorylabel = 'Category';
+
+  static String selectDueDateLabel = 'Due Date';
+
+  static String selectCategory = 'Select Category';
 }

@@ -23,12 +23,11 @@ class AddTasksWidgets {
     required String? categoryDropDown,
     required List<String> itemsDropDownList,
     required Function onTapAddNew,
-    required Function onTapReminderDate,
-    required Function onTapReminderTime,
+    required Function onTapReminderDateAndTime,
     required bool? isReminder,
   }) {
     return SizedBox(
-      height: height / 1.7,
+      height: height / 1.5,
       width: double.infinity,
       child: Card(
         shadowColor: ColorManager.shadowColor,
@@ -42,6 +41,9 @@ class AddTasksWidgets {
             children: [
 //========================= Text Feild Add Task
               CustomTxtField(
+                isDimed: false,
+                //isEnabled: ,
+                togglePassword: () {},
                 hintText: AppStrings.hintTypingTask,
                 labelText: AppStrings.addTasksLabel,
                 controller: addTaskTitleController,
@@ -53,6 +55,7 @@ class AddTasksWidgets {
               ),
 //========================== Text Feild Dueo Date
               DatePicker.buildDatePicker(
+                hintText: 'select Due Date',
                 togglePassword: () {
                   showDatePicker(
                     context: context,
@@ -112,31 +115,20 @@ class AddTasksWidgets {
                 ],
               ),
               SizedBox(
-                height: height / 25,
+                height: height / 70,
               ),
 //====================== Show Reminder Date And Time
               isReminder == true
                   ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Reminder Date'),
+                        Text('Reminder Date & Time'),
                         IconButton(
                           onPressed: () {
-                            onTapReminderDate();
+                            onTapReminderDateAndTime();
                           },
                           icon: Icon(
                             Icons.date_range_outlined,
-                            color: ColorManager.primary,
-                            size: 25,
-                          ),
-                        ),
-                        Spacer(),
-                        Text('Reminder Time'),
-                        IconButton(
-                          onPressed: () {
-                            onTapReminderTime();
-                          },
-                          icon: Icon(
-                            Icons.timer,
                             color: ColorManager.primary,
                             size: 25,
                           ),
@@ -182,15 +174,15 @@ class AddTasksWidgets {
                         height: 40,
                         width: 40,
                         child: Icon(
-                          Icons.add,
+                          Icons.save,
                           color: ColorManager.green,
                         ),
                       ),
                       const SizedBox(
-                        width: 10.0,
+                        width: 20.0,
                       ),
                       Text(
-                        AppStrings.addNewLabel,
+                        AppStrings.saveLabel,
                         style: getMediumStyle(
                           fontFamily: AppStrings.gilroyMedium,
                           color: ColorManager.green,

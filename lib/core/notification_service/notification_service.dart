@@ -108,9 +108,9 @@ class NotificationController {
   ///     REQUESTING NOTIFICATION PERMISSIONS
   ///  *********************************************
   ///
-  static Future<bool> displayNotificationRationale() async {
+  static Future<bool> displayNotificationRationale(context) async {
     bool userAuthorized = false;
-    BuildContext context = MyApp.navigatorKey.currentContext!;
+    //BuildContext context = MyApp.navigatorKey.currentContext!;
     await showDialog(
         context: context,
         builder: (BuildContext ctx) {
@@ -124,7 +124,7 @@ class NotificationController {
                   children: [
                     Expanded(
                       child: Image.asset(
-                        'assets/images/animated-bell.gif',
+                        'assets/images/app_icon.webp',
                         height: MediaQuery.of(context).size.height * 0.3,
                         fit: BoxFit.fitWidth,
                       ),
@@ -183,9 +183,9 @@ class NotificationController {
   ///     NOTIFICATION CREATION METHODS
   ///  *********************************************
   ///
-  static Future<void> createNewNotification() async {
+  static Future<void> createNewNotification(context) async {
     bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
-    if (!isAllowed) isAllowed = await displayNotificationRationale();
+    if (!isAllowed) isAllowed = await displayNotificationRationale(context);
     if (!isAllowed) return;
 
     await AwesomeNotifications().createNotification(
@@ -215,9 +215,18 @@ class NotificationController {
         ]);
   }
 
-  static Future<void> scheduleNewNotification() async {
+  static Future<void> scheduleNewNotification(
+      {required int hoursFromNow,
+      required String heroThumbUrl,
+      required String username,
+      required String title,
+      required String msg,
+      required int seconds,
+      required int minutes,
+      required int days,
+      required context}) async {
     bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
-    if (!isAllowed) isAllowed = await displayNotificationRationale();
+    if (!isAllowed) isAllowed = await displayNotificationRationale(context);
     if (!isAllowed) return;
 
     await myNotifyScheduleInHours(
@@ -225,8 +234,11 @@ class NotificationController {
         msg: 'test message',
         heroThumbUrl:
             'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
-        hoursFromNow: 0,
+        hoursFromNow: hoursFromNow,
         username: 'test user',
+        days: days,
+        minutes: minutes,
+        seconds: seconds,
         repeatNotif: false);
   }
 
@@ -244,13 +256,21 @@ class NotificationController {
     required String username,
     required String title,
     required String msg,
+    required int seconds,
+    required int minutes,
+    required int days,
     bool repeatNotif = false,
   }) async {
-    var nowDate = DateTime.now()
-        .add(Duration(hours: hoursFromNow, seconds: 10, minutes: 0));
+    var nowDate = DateTime.now().add(Duration(
+      days: days,
+      hours: hoursFromNow,
+      seconds: seconds,
+      minutes: minutes,
+    ));
     await AwesomeNotifications().createNotification(
       schedule: NotificationCalendar(
-        //weekday: nowDate.day,
+        day: nowDate.day,
+        //  weekday: nowDate.day,
         hour: nowDate.hour,
         minute: nowDate.minute,
         second: nowDate.second,
@@ -262,12 +282,13 @@ class NotificationController {
       content: NotificationContent(
           id: -1, // -1 is replaced by a random number
           channelKey: 'alerts',
-          title: 'Huston! The eagle has landed!',
-          body:
-              "A small step for a man, but a giant leap to Flutter's community!",
-          bigPicture: 'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
-          largeIcon: 'https://storage.googleapis.com/cms-storage-bucket/0dbfcc7a59cd1cf16282.png',
-          //'asset://assets/images/balloons-in-sky.jpg',
+          // title: 'Tasks Manager App',
+          body: 'Pleas Check Task in app in Time Now',
+          // bigPicture:
+          //     'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
+          largeIcon:
+              // 'https://storage.googleapis.com/cms-storage-bucket/0dbfcc7a59cd1cf16282.png',
+              'asset://assets/images/app_icon.webp,',
           notificationLayout: NotificationLayout.BigPicture,
           payload: {'notificationId': '1234567890'}),
       //  NotificationContent(
@@ -283,16 +304,18 @@ class NotificationController {
       //   // customSound: 'resource://raw/notif',
       //   payload: {'actPag': 'myAct', 'actType': 'food', 'username': username},
       // ),
-      actionButtons: [
-        NotificationActionButton(
-          key: 'NOW',
-          label: 'btnAct1',
-        ),
-        NotificationActionButton(
-          key: 'LATER',
-          label: 'btnAct2',
-        ),
-      ],
+
+      //===
+      // actionButtons: [
+      //   NotificationActionButton(
+      //     key: 'NOW',
+      //     label: 'btnAct1',
+      //   ),
+      //   NotificationActionButton(
+      //     key: 'LATER',
+      //     label: 'btnAct2',
+      //   ),
+      // ],
     );
   }
 }
