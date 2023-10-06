@@ -1,6 +1,7 @@
 import 'package:task_manager_app/data/models/taskes_model/tasks_model.dart';
 
 import '../../../boxes_cach.dart';
+import '../../../core/notification_service/notification_service.dart';
 import '../../models/categories_model/categories_model.dart';
 
 class TasksRepository {
@@ -42,5 +43,28 @@ class TasksRepository {
     } catch (e) {
       return Future.error(e.toString());
     }
+  }
+
+//====================================== Notification calling remind Me
+  Future<void> callNotificationRemindMe(
+      {required int hoursFromNow,
+      required String heroThumbUrl,
+      required String username,
+      required String title,
+      required String msg,
+      required int seconds,
+      required int minutes,
+      required int days,
+      required context}) async {
+    await NotificationController.scheduleNewNotification(
+        hoursFromNow: hoursFromNow,
+        heroThumbUrl: heroThumbUrl,
+        username: username,
+        title: title,
+        msg: msg,
+        seconds: seconds,
+        minutes: minutes,
+        days: days,
+        context: context);
   }
 }

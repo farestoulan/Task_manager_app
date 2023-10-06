@@ -9,7 +9,9 @@ class DatePicker {
   static Widget buildDatePicker({
     required Function togglePassword,
     required TextEditingController dateController,
+    required String hintText,
     final String? Function(String? value)? validator,
+    bool isEditable = true,
   }) {
     return TextFormField(
       style: getRegularStyle(
@@ -21,7 +23,10 @@ class DatePicker {
       controller: dateController,
       keyboardType: TextInputType.none,
       decoration: InputDecoration(
-        hintText: 'select Date',
+        enabled: isEditable,
+        hintText: hintText,
+        labelText: hintText,
+
         filled: true,
         fillColor: ColorManager.grey2,
         // hintStyle: TextStyle(color: ColorManager.primary, fontSize: 15),
@@ -30,12 +35,14 @@ class DatePicker {
           child: IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onPressed: () => togglePassword(),
-            icon: Icon(
-              color: ColorManager.primary,
-              Icons.calendar_month_rounded,
-              size: 25,
-            ),
+            onPressed: isEditable ? () => togglePassword() : () {},
+            icon: isEditable
+                ? Icon(
+                    color: ColorManager.primary,
+                    Icons.calendar_month_rounded,
+                    size: 25,
+                  )
+                : Container(),
           ),
         ),
         border: OutlineInputBorder(

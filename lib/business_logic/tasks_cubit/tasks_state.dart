@@ -37,3 +37,5 @@ class AddTaskError extends TasksState {
 
   AddTaskError({required this.error});
 }
+
+class DateAndTimePickedSuccess extends TasksState {}

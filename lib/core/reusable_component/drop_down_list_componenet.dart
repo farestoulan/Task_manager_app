@@ -67,7 +67,7 @@ class _DropDownComponenetState extends State<DropDownComponenet> {
         iconStyleData: IconStyleData(
           icon: Icon(
             Icons.keyboard_arrow_down,
-            size: 25,
+            size: 30,
           ),
           iconSize: 14,
           iconEnabledColor: ColorManager.blackColor,

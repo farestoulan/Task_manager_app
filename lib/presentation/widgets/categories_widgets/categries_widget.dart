@@ -23,6 +23,9 @@ class CategoriesWidgets {
           SizedBox(
             width: width / 2.2,
             child: CustomTxtField(
+              isDimed: false,
+              //isEnabled: ,
+              togglePassword: () {},
               hintText: AppStrings.hintTyping,
               labelText: AppStrings.addCategoiesLabel,
               controller: categoryController,
@@ -143,7 +146,12 @@ class CategoriesWidgets {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(AppStrings.categoryName),
+                        Text(
+                          AppStrings.categoryName,
+                          style: getSemiBoldStyle(
+                              color: ColorManager.blackColor,
+                              fontFamily: AppStrings.gilroySemiBold),
+                        ),
                         Text(categoriesList[index].categoryName),
                       ],
                     )
@@ -176,6 +184,9 @@ class CategoriesWidgets {
             width: MediaQuery.of(context).size.width / 1,
             height: MediaQuery.of(context).size.height / 10,
             child: CustomTxtField(
+              isDimed: false,
+              //isEnabled: ,
+              togglePassword: () {},
               hintText: AppStrings.hintTyping,
               labelText: AppStrings.addCategoiesLabel,
               controller: editController,

@@ -36,7 +36,7 @@ class CategoriesRepository {
     }
   }
 
-//========================= delet Categories
+//========================= Edit Categories
   Future editCategories(
       {required String categoryValueEdited,
       required CategoriesModel categoriesModel}) async {
