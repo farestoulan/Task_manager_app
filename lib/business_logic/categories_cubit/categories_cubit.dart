@@ -78,4 +78,27 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       print(e.toString());
     }
   }
+
+  //=============================== get Tasks
+  void getTasks() {
+    try {
+      emit(GetTaksLoading());
+      categoriesRepository.getTasks().then((tasksList) {
+        emit(GetTasksSuccess(tasksList: tasksList));
+      }).catchError((error) {
+        emit(GetTasksError(error: error.toString()));
+      });
+    } catch (e) {
+      emit(GetTasksError(error: e.toString()));
+    }
+  }
+
+//========================== delet Category State
+  void deletCategory({
+    required int categoryKey,
+    required CategoriesModel categoriesModel,
+  }) {
+    emit(DeletCategorySuccess(
+        categoryKey: categoryKey, categoriesModel: categoriesModel));
+  }
 }

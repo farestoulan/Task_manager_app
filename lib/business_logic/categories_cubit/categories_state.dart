@@ -1,5 +1,7 @@
 import 'package:task_manager_app/data/models/categories_model/categories_model.dart';
 
+import '../../data/models/taskes_model/tasks_model.dart';
+
 class CategoriesState {}
 
 class CategoriesInitial extends CategoriesState {}
@@ -50,4 +52,29 @@ class EditCategoriesError extends CategoriesState {
   final String error;
 
   EditCategoriesError({required this.error});
+}
+
+//=================== Get Task
+class GetTaksLoading extends CategoriesState {}
+
+class GetTasksSuccess extends CategoriesState {
+  final List<TasksModel> tasksList;
+
+  GetTasksSuccess({required this.tasksList});
+}
+
+class GetTasksError extends CategoriesState {
+  final String error;
+
+  GetTasksError({required this.error});
+}
+
+//=========================== delet category
+
+class DeletCategorySuccess extends CategoriesState {
+  final int categoryKey;
+  final CategoriesModel categoriesModel;
+
+  DeletCategorySuccess(
+      {required this.categoryKey, required this.categoriesModel});
 }

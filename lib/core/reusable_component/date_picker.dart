@@ -75,7 +75,7 @@ class DatePicker {
         if (validator != null) {
           return validator(val);
         } else if (val!.isEmpty) {
-          return 'test';
+          return AppStrings.dueDateRequiredMsg;
         }
 
         return null;

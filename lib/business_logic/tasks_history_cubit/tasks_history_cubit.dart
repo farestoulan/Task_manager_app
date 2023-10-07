@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_state.dart';
-
 import '../../data/models/categories_model/categories_model.dart';
 import '../../data/models/taskes_model/tasks_model.dart';
 import '../../data/repositories/tasks_history_repository/tasks_history_repository.dart';
@@ -212,5 +211,25 @@ class TasksHistoryCubit extends Cubit<TasksHistoryState> {
 //=========================== Filterwd Tasks By Deu Date
   void filterTasksByDeuDate() {
     emit(FilterByDeuDateSuccess());
+  }
+
+//============================= Completed Task
+  void completedTask({required TasksModel tasksModel}) {
+    emit(CompletedTaskScuccess(tasksModel: tasksModel));
+  }
+
+//=========================== Get Tasks Filtered
+
+  void getTasksFilterd() {
+    try {
+      emit(GetTaksFilteredLoading());
+      tasksHistoryRepository.getTasks().then((tasksList) {
+        emit(GetTasksFilteredSuccess(tasksList: tasksList));
+      }).catchError((error) {
+        emit(GetTasksFilteredError(error: error.toString()));
+      });
+    } catch (e) {
+      emit(GetTasksFilteredError(error: e.toString()));
+    }
   }
 }

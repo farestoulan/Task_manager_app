@@ -16,6 +16,8 @@ class Routes {
 
   static const String tasksDetailesScreen = '/tasksDetailesScreen';
 
+  static const String ditTasksDetailesScreen = '/ditTasksDetailesScreen';
+
 //================================== navigate and Push
   static void navigateTo(context, String namedRouting) => Navigator.pushNamed(
         context,
@@ -86,6 +88,20 @@ class AppRoutes {
           child: routeSettings.arguments is TasksModel
               ? TaskDetailsScreen(
                   tasksModel: routeSettings.arguments as TasksModel,
+                )
+              : TaskDetailsScreen(),
+          type: PageTransitionType.leftToRight,
+          settings: routeSettings,
+        );
+
+//======================= Edit Task Screen in history screen
+
+      case Routes.ditTasksDetailesScreen:
+        return PageTransition(
+          child: routeSettings.arguments is TasksModel
+              ? TaskDetailsScreen(
+                  tasksModel: routeSettings.arguments as TasksModel,
+                  isEditabel: false,
                 )
               : TaskDetailsScreen(),
           type: PageTransitionType.leftToRight,

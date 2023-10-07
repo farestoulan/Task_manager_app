@@ -91,3 +91,74 @@ removeAlert(
     },
   );
 }
+
+//============================== Pop up with one Action
+showAlertOneAction({
+  required BuildContext ctx,
+  required double height,
+  required double width,
+  required String content,
+  required Function doneFunction,
+  required String doneTitle,
+}) {
+  showDialog(
+    barrierDismissible: true,
+    context: ctx,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        content: Container(
+          width: MediaQuery.of(context).size.width / 1.1,
+          height: MediaQuery.of(context).size.height / 10,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  content,
+                  maxLines: 4,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: getBoldStyle(
+                    color: ColorManager.blackColor,
+                    fontSize: width / 26,
+                    fontFamily: AppStrings.gilroyBold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 3.5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorManager.primary,
+                  ),
+                  child: TextButton(
+                    child: Text(
+                      doneTitle,
+                      style: TextStyle(
+                        color: ColorManager.whiteColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      doneFunction();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
