@@ -29,7 +29,7 @@ class CategoriesWidgets {
               hintText: AppStrings.hintTyping,
               labelText: AppStrings.addCategoiesLabel,
               controller: categoryController,
-              emptyErrMsg: 'bbbbb',
+              emptyErrMsg: AppStrings.massageValidatation,
               txtInputType: TextInputType.text,
             ),
           ),

@@ -7,7 +7,7 @@ class AppStrings {
   static String gilroyRegular = 'Gilroy-Regular';
 
 //============================== Categories Screen
-  static String addCategoiesLabel = 'Add Category';
+  static String addCategoiesLabel = 'Enter Category';
 
   static String hintTyping = 'What do you add?';
 
@@ -21,7 +21,7 @@ class AppStrings {
 
   static String categoryName = 'Category Name';
 
-  static String categoryScreenTitle = 'Categories Manager';
+  static String categoryScreenTitle = 'Categories List';
 
   static String successMassage = 'Category Added Successfully';
 
@@ -29,11 +29,13 @@ class AppStrings {
 
   static String massageEdited = 'Category Edit Successfully';
 
-  static String massageValidatation = 'Pleas Input category';
+  static String massageValidatation = 'Pleas Enter category';
 
   static String askRemoveCategory = 'Do you want remove This Category?';
 
   static String noData = 'No Categories';
+
+  static String okLabelButtonPopUp = 'OK';
 
 //=============================== Add Task Screen
   static String TaskScreenTitle = 'Add Task';
@@ -43,7 +45,20 @@ class AppStrings {
   static String hintTypingTask = 'What do you add?';
 
   static String reminderMe = 'Remind Me';
+
   static String saveLabel = 'Save';
+
+  static String interDueDaterequiredMassage = 'Pleas Enter requried data';
+
+  static String interDateAndTimerequiredMassage = 'Please select date and time';
+
+  static String addDueDate = 'Due Date';
+
+  static String taskTitleRequiredMsg = 'Pleas Enter Task Title';
+
+  static String dueDateRequiredMsg = 'Pleas Enter Due Date';
+
+  static String successTaskMassage = 'Task Added Successfully';
 
 //===================================== Tasks History Screen
   static String taskTitleLabel = 'Task Title';
@@ -51,6 +66,16 @@ class AppStrings {
   static String taskStatusLabel = 'Task Status';
 
   static String massageDeletedTask = 'Task Deleted Successfully';
+
+  static String filterDueDate = 'Due Date';
+
+  static String taskHistoryScreenTitle = 'Tasks List';
+
+  static String restbTn = 'Rest';
+
+  static String newStatus = 'New';
+
+  static String completedStatus = 'Completed';
 
 //================================== Task Detailes Screen
 
@@ -63,4 +88,12 @@ class AppStrings {
   static String selectDueDateLabel = 'Due Date';
 
   static String selectCategory = 'Select Category';
+
+  static String successMassageEdit = 'Task Updated Successfully';
+
+  static String changeStatusLabel = 'Is Completed';
+
+  static String deletBTNLabel = 'Delet';
+
+  static String editBTNLabel = 'Edit';
 }

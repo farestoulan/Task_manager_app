@@ -52,7 +52,7 @@ class CustomTxtField extends StatelessWidget {
       style: getRegularStyle(
         fontFamily: AppStrings.gilroySemiBold,
         color: ColorManager.blackColor,
-        fontSize: FontSize.s17,
+        fontSize: FontSize.s16,
       ),
       maxLines: maxLiness,
       //   autovalidateMode: AutovalidateMode.onUserInteraction,

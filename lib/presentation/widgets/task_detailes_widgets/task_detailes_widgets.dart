@@ -59,7 +59,7 @@ class TaskDetailesWidgets {
                       size: 30,
                     ),
                     Text(
-                      'Edit',
+                      AppStrings.editBTNLabel,
                       style: getRegularStyle(
                           fontFamily: AppStrings.gilroyRegular,
                           color: ColorManager.editIcongrey,
@@ -83,11 +83,12 @@ class TaskDetailesWidgets {
                       size: 30,
                     ),
                     Text(
-                      'Delet',
+                      AppStrings.deletBTNLabel,
                       style: getRegularStyle(
-                          fontFamily: AppStrings.gilroyRegular,
-                          color: ColorManager.redColor,
-                          fontSize: FontSize.s12),
+                        fontFamily: AppStrings.gilroyRegular,
+                        color: ColorManager.redColor,
+                        fontSize: FontSize.s12,
+                      ),
                     ),
                   ],
                 ),
@@ -181,6 +182,39 @@ class TaskDetailesWidgets {
                   onTapChecked(value);
                 }
               : (value) {},
+        ),
+      ],
+    );
+  }
+
+//====================== Change Status
+  static Widget buildChangeStatus({
+    required double width,
+    required bool isChecked,
+    required Function(bool? checkedValue) onTapChecked,
+    required bool isEditable,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          '${AppStrings.changeStatusLabel}',
+          style: getMediumStyle(
+              color: ColorManager.blackColor,
+              fontFamily: AppStrings.gilroyMedium),
+        ),
+        Transform.scale(
+          scale: 1.5,
+          child: Switch(
+            activeTrackColor: ColorManager.primary,
+            activeColor: ColorManager.whiteColor,
+            value: isChecked,
+            onChanged: isEditable == true
+                ? (valueChanged) {
+                    onTapChecked(valueChanged);
+                  }
+                : (value) {},
+          ),
         ),
       ],
     );

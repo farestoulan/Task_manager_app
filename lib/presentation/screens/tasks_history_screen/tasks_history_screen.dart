@@ -48,6 +48,10 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
           }
 
           if (state is FilterByDeuDateSuccess) {
+            TasksHistoryCubit.get(context).getTasksFilterd();
+          }
+          if (state is GetTasksFilteredSuccess) {
+            tasksList = state.tasksList;
             setState(() {
               filteredByDeuDate = tasksList
                   .where((element) => element.dueDate == dueDateController.text)
@@ -55,6 +59,20 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
               print('filteredByDeuDate :${filteredByDeuDate.length}');
               tasksList = filteredByDeuDate;
             });
+          }
+          if (state is CompletedTaskScuccess) {
+            TasksHistoryCubit.get(context).editTask(
+                taskTitle: state.tasksModel.taskTitle,
+                dueDate: state.tasksModel.dueDate,
+                isCompleted: true,
+                categoryId: state.tasksModel.categoryId,
+                remindMe: state.tasksModel.remindMe,
+                reminderDate: state.tasksModel.reminderDate,
+                reminderTime: state.tasksModel.reminderTime,
+                taskModel: state.tasksModel);
+          }
+          if (state is EditTaskSuccess) {
+            TasksHistoryCubit.get(context).getTasks();
           }
         },
         builder: (context, state) {
@@ -64,23 +82,15 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
                     title: Text(
-                      'Tasks History',
+                      AppStrings.taskHistoryScreenTitle,
                       style: Theme.of(context).appBarTheme.titleTextStyle,
                     ),
-                    actions: [
-                      // IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-                      // IconButton(
-                      //     onPressed: () {
-                      //       AppCubit.get(context).changeAppMode();
-                      //     },
-                      //     icon: const Icon(Icons.brightness_4_outlined))
-                    ],
                   ),
                   body: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        //========================== Text Feild Dueo Date
+//=========================== Text Feild Dueo Date
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,9 +104,10 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                 child: TextButton(
                                   onPressed: () {
                                     TasksHistoryCubit.get(context).getTasks();
+                                    dueDateController.clear();
                                   },
                                   child: Text(
-                                    'Rest',
+                                    AppStrings.restbTn,
                                     style: getMediumStyle(
                                         color: ColorManager.green,
                                         fontFamily: AppStrings.gilroyMedium),
@@ -105,7 +116,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                             SizedBox(
                               width: width / 1.8,
                               child: DatePicker.buildDatePicker(
-                                hintText: 'Filter by deu date',
+                                hintText: AppStrings.filterDueDate,
                                 togglePassword: () {
                                   showDatePicker(
                                     context: context,
@@ -142,8 +153,8 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                         ),
                         Divider(color: ColorManager.grey3),
 
-                        //===================== List Of Tasks
-                        Expanded(
+//============================= List Of Tasks
+                        Flexible(
                           child: ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
@@ -155,13 +166,29 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                 width: width,
                                 tasksList: tasksList,
                                 index: index,
-                                //======================== Delet Task
+//================================= Completed Task
+                                onTapCompleted: () {
+                                  removeAlert(
+                                      ctx: context,
+                                      height: height,
+                                      width: width,
+                                      content:
+                                          'Are You Sure Completed This Task(${tasksList[index].taskTitle}) ?',
+                                      doneFunction: () {
+                                        Navigator.pop(context);
+                                        TasksHistoryCubit.get(context)
+                                            .completedTask(
+                                                tasksModel: tasksList[index]);
+                                      });
+                                },
+//================================== Delet Task
                                 onTapDelet: () {
                                   removeAlert(
                                       ctx: context,
                                       height: height,
                                       width: width,
-                                      content: 'Do You want Delet Task?',
+                                      content:
+                                          'Do You want Delet This Task( ${tasksList[index].taskTitle} )?',
                                       doneFunction: () {
                                         Navigator.pop(context);
                                         TasksHistoryCubit.get(context)
@@ -169,8 +196,13 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                                 tasksModel: tasksList[index]);
                                       });
                                 },
-                                onTapEdit: () {},
-                                //====================== Go Task Detailes
+                                onTapEdit: () {
+                                  Routes.navigateAndPushArgs(
+                                      context,
+                                      Routes.ditTasksDetailesScreen,
+                                      tasksList[index]);
+                                },
+//============================ Go Task Detailes
                                 onTapItem: () {
                                   Routes.navigateAndPushArgs(
                                       context,

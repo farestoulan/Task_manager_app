@@ -25,6 +25,7 @@ class AddTasksWidgets {
     required Function onTapAddNew,
     required Function onTapReminderDateAndTime,
     required bool? isReminder,
+    required Function(String selectValue) onChangeTaskTitleTextFeild,
   }) {
     return SizedBox(
       height: height / 1.5,
@@ -41,13 +42,16 @@ class AddTasksWidgets {
             children: [
 //========================= Text Feild Add Task
               CustomTxtField(
+                onchange: (value) {
+                  onChangeTaskTitleTextFeild(value!);
+                },
                 isDimed: false,
                 //isEnabled: ,
                 togglePassword: () {},
                 hintText: AppStrings.hintTypingTask,
                 labelText: AppStrings.addTasksLabel,
                 controller: addTaskTitleController,
-                emptyErrMsg: 'teeeeest',
+                emptyErrMsg: AppStrings.taskTitleRequiredMsg,
                 txtInputType: TextInputType.text,
               ),
               SizedBox(
@@ -55,7 +59,7 @@ class AddTasksWidgets {
               ),
 //========================== Text Feild Dueo Date
               DatePicker.buildDatePicker(
-                hintText: 'select Due Date',
+                hintText: AppStrings.addDueDate,
                 togglePassword: () {
                   showDatePicker(
                     context: context,

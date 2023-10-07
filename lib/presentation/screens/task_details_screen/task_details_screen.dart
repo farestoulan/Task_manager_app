@@ -19,7 +19,9 @@ import '../../widgets/task_detailes_widgets/task_detailes_widgets.dart';
 
 class TaskDetailsScreen extends StatefulWidget {
   TasksModel? tasksModel;
-  TaskDetailsScreen({Key? key, this.tasksModel}) : super(key: key);
+  bool? isEditabel;
+  TaskDetailsScreen({Key? key, this.tasksModel, this.isEditabel = false})
+      : super(key: key);
 
   @override
   State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
@@ -34,7 +36,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
 
   TextEditingController dateAndTimeController = TextEditingController();
 
-  bool isEditabel = false;
+  //bool isEditabel = false;
 
   String? categoryDropDown;
 
@@ -47,6 +49,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   String categoryName = '';
 
   bool isCheckedReminedMe = false;
+  bool isCheckedChangeStatus = false;
+  bool isSelectDateAndTime = false;
 
   int? categoryKey;
 
@@ -73,6 +77,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     dateAndTimeController.text =
         widget.tasksModel!.reminderDate + " " + widget.tasksModel!.reminderTime;
     isCheckedReminedMe = widget.tasksModel!.remindMe;
+    isCheckedChangeStatus = widget.tasksModel!.isCompleted;
+
     super.initState();
   }
 
@@ -95,13 +101,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
             );
           }
           if (state is EditTaskActionSuccess) {
-            isEditabel = true;
+            widget.isEditabel = true;
             TasksHistoryCubit.get(context).getCategories();
           }
 
           if (state is EditTaskSuccess) {
 //======================= call notification reminder Me
-            if (isCheckedReminedMe == true) {
+            if (isSelectDateAndTime == true) {
               await TasksHistoryCubit.get(context).callNotificationRemindMe(
                 context: context,
                 days: days,
@@ -116,7 +122,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               );
             }
             successAlert(
-              content: AppStrings.successMassage,
+              content: AppStrings.successMassageEdit,
               ctx: context,
               width: width,
             );
@@ -175,13 +181,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                           TasksHistoryCubit.get(context).editTaskActionIcon();
                         },
                       ),
-                      SizedBox(
-                        height: height / 40,
-                      ),
+                      // SizedBox(
+                      //   height: height / 50,
+                      // ),
 //====================Task Title
                       CustomTxtField(
                         isDimed: false,
-                        isEnabled: isEditabel,
+                        isEnabled: widget.isEditabel!,
                         togglePassword: () {},
                         hintText: AppStrings.hintTypingTask,
                         labelText: AppStrings.addTasksLabel,
@@ -191,10 +197,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       ),
 
                       SizedBox(
-                        height: height / 20,
+                        height: height / 30,
                       ),
 //==================== Category Drop down and Text Feild
-                      isEditabel == true
+                      widget.isEditabel == true
                           ? DropDownComponenet(
                               hint: AppStrings.selectCategory,
                               onChange: (value) {
@@ -210,7 +216,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                             )
                           : CustomTxtField(
                               isDimed: false,
-                              isEnabled: isEditabel,
+                              isEnabled: widget.isEditabel!,
                               togglePassword: () {},
                               hintText: AppStrings.categorylabel,
                               labelText: AppStrings.categorylabel,
@@ -220,11 +226,11 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                             ),
 
                       SizedBox(
-                        height: height / 20,
+                        height: height / 30,
                       ),
 //========================== Text Feild Dueo Date
                       DatePicker.buildDatePicker(
-                        isEditable: isEditabel,
+                        isEditable: widget.isEditabel!,
                         hintText: AppStrings.selectDueDateLabel,
                         togglePassword: () {
                           showDatePicker(
@@ -253,11 +259,11 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                         dateController: dueDateController,
                       ),
                       SizedBox(
-                        height: height / 20,
+                        height: height / 30,
                       ),
 //====================== Check box Reminder
                       TaskDetailesWidgets.buildChechRemindMe(
-                        isEditable: isEditabel,
+                        isEditable: widget.isEditabel!,
                         isChecked: isCheckedReminedMe,
                         onTapChecked: (valueSelected) {
                           setState(() {
@@ -267,14 +273,15 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                         width: width,
                       ),
                       SizedBox(
-                        height: height / 20,
+                        height: height / 30,
                       ),
 //========================== Text Feild Date And Time
                       isCheckedReminedMe == true
                           ? DatePicker.buildDatePicker(
-                              isEditable: isEditabel,
+                              isEditable: widget.isEditabel!,
                               hintText: AppStrings.selectDateAndTime,
                               togglePassword: () async {
+                                isSelectDateAndTime = true;
                                 dateTime = await TasksHistoryCubit.get(context)
                                         .showDateTimePicker(context: context) ??
                                     DateTime.now();
@@ -315,10 +322,24 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                             )
                           : Container(),
                       SizedBox(
-                        height: height / 20,
+                        height: height / 30,
+                      ),
+//============================ change Status
+                      TaskDetailesWidgets.buildChangeStatus(
+                        width: width,
+                        isChecked: isCheckedChangeStatus,
+                        onTapChecked: (isCheckedChange) {
+                          setState(() {
+                            isCheckedChangeStatus = isCheckedChange!;
+                          });
+                        },
+                        isEditable: widget.isEditabel!,
+                      ),
+                      SizedBox(
+                        height: height / 30,
                       ),
 //======================= BTN Save Editing
-                      isEditabel == true
+                      widget.isEditabel! == true
                           ? TaskDetailesWidgets.buildBTNSaveTask(
                               height: height,
                               width: width,
@@ -327,14 +348,15 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                 await TasksHistoryCubit.get(context).editTask(
                                   taskTitle: addTaskTitleController.text,
                                   dueDate: dueDateController.text,
-                                  isCompleted: widget.tasksModel!.isCompleted,
+                                  isCompleted: isCheckedChangeStatus,
                                   categoryId: categoryKey ??
                                       widget.tasksModel!.categoryId,
                                   remindMe: isCheckedReminedMe,
-                                  reminderDate: dateTime.toString(),
+                                  reminderDate: reminderDate ??
+                                      widget.tasksModel!.reminderDate,
                                   reminderTime: TasksHistoryCubit.get(context)
                                           .reminderTime ??
-                                      '',
+                                      widget.tasksModel!.reminderTime,
                                   taskModel: widget.tasksModel!,
                                 );
                               },

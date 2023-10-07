@@ -1,5 +1,6 @@
 import '../../../boxes_cach.dart';
 import '../../models/categories_model/categories_model.dart';
+import '../../models/taskes_model/tasks_model.dart';
 
 class CategoriesRepository {
 //=========================== Add Categories
@@ -44,6 +45,23 @@ class CategoriesRepository {
       final box = Boxes.getCategories();
       box.put(categoriesModel.key,
           CategoriesModel(categoryName: categoryValueEdited));
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  //=========================== get Tasks
+  Future<List<TasksModel>> getTasks() async {
+    try {
+      List<TasksModel> tasksLisBox = [];
+
+      tasksLisBox = Boxes.getTasks().values.toList();
+//===================== Sorted List per category
+      tasksLisBox.sort((a, b) {
+        return a.categoryId.compareTo(b.categoryId);
+      });
+
+      return tasksLisBox;
     } catch (e) {
       return Future.error(e.toString());
     }

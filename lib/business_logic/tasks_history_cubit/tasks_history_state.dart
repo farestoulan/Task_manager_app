@@ -100,3 +100,31 @@ class GetCategoryKeySuccess extends TasksHistoryState {
 
 //===================== Filter By deu Date
 class FilterByDeuDateSuccess extends TasksHistoryState {}
+
+//============================== Completed Task
+
+class CompletedTaskScuccess extends TasksHistoryState {
+  final TasksModel tasksModel;
+
+  CompletedTaskScuccess({required this.tasksModel});
+}
+
+//=================== Get Task Filtered Due date
+class GetTaksFilteredLoading extends TasksHistoryState {}
+
+class GetTasksFilteredSuccess extends TasksHistoryState {
+  final List<TasksModel> tasksList;
+
+  GetTasksFilteredSuccess({required this.tasksList});
+}
+
+class GetTasksFilteredError extends TasksHistoryState {
+  final String error;
+
+  GetTasksFilteredError({required this.error});
+}
+
+//=================================
+class AppChangeModeLoadinggState extends TasksHistoryState {}
+
+class AppChangeModeeState extends TasksHistoryState {}
