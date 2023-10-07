@@ -1,8 +1,12 @@
 # Tasks Manager App
 
-Manage Tasks and remind me This tasks .
+This app is managing tasks , You can add multiple tasks grouped by category ,You can set reminder on any task and the application will notify you and You can set the task as completed to know which tasks are open and which tasks are completed
 
 ## Some Screen shot And Demo
+
+
+https://github.com/farestoulan/Task_manager_app/assets/102663775/0e6f65b2-7820-411d-a29f-8e548e77c883
+
 
 
 ![Screenshot_20231007_035306](https://github.com/farestoulan/Task_manager_app/assets/102663775/57897139-46d6-429d-a4b8-78a36f599460) !
