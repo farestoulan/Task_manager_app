@@ -12,7 +12,9 @@ class DatePicker {
     required String hintText,
     final String? Function(String? value)? validator,
     bool isEditable = true,
+    BuildContext? context,
   }) {
+    // IconThemeData iconThemeData = IconTheme.of(context);
     return TextFormField(
       style: getRegularStyle(
         fontFamily: AppStrings.gilroySemiBold,
@@ -38,7 +40,8 @@ class DatePicker {
             onPressed: isEditable ? () => togglePassword() : () {},
             icon: isEditable
                 ? Icon(
-                    color: ColorManager.primary,
+                    color: IconTheme.of(context!).color,
+                    //  ColorManager.primary,
                     Icons.calendar_month_rounded,
                     size: 25,
                   )

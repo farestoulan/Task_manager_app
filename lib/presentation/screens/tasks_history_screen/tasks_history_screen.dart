@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:task_manager_app/business_logic/app_cubit/app_cubit.dart';
+import 'package:task_manager_app/business_logic/app_cubit/app_cubit_state.dart';
 import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_cubit.dart';
 import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_state.dart';
 import '../../../config/app/routes/app_routes.dart';
@@ -85,12 +87,21 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                       AppStrings.taskHistoryScreenTitle,
                       style: Theme.of(context).appBarTheme.titleTextStyle,
                     ),
+                    actions: [
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.search)),
+                      IconButton(
+                          onPressed: () {
+                            AppCubit.get(context).changeAppMode();
+                          },
+                          icon: const Icon(Icons.brightness_4_outlined))
+                    ],
                   ),
                   body: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-//=========================== Text Feild Dueo Date
+                        //=========================== Text Feild Dueo Date
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,6 +127,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                             SizedBox(
                               width: width / 1.8,
                               child: DatePicker.buildDatePicker(
+                                context: context,
                                 hintText: AppStrings.filterDueDate,
                                 togglePassword: () {
                                   showDatePicker(
@@ -153,7 +165,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                         ),
                         Divider(color: ColorManager.grey3),
 
-//============================= List Of Tasks
+                        //============================= List Of Tasks
                         Flexible(
                           child: ListView.separated(
                             physics: const BouncingScrollPhysics(),
@@ -166,7 +178,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                 width: width,
                                 tasksList: tasksList,
                                 index: index,
-//================================= Completed Task
+                                //================================= Completed Task
                                 onTapCompleted: () {
                                   removeAlert(
                                       ctx: context,
@@ -181,7 +193,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                                 tasksModel: tasksList[index]);
                                       });
                                 },
-//================================== Delet Task
+                                //================================== Delet Task
                                 onTapDelet: () {
                                   removeAlert(
                                       ctx: context,
@@ -202,7 +214,7 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                                       Routes.ditTasksDetailesScreen,
                                       tasksList[index]);
                                 },
-//============================ Go Task Detailes
+                                //============================ Go Task Detailes
                                 onTapItem: () {
                                   Routes.navigateAndPushArgs(
                                       context,

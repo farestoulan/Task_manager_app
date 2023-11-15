@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:task_manager_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:task_manager_app/business_logic/categories_cubit/categories_cubit.dart';
 import 'package:task_manager_app/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_cubit.dart';
@@ -17,7 +18,7 @@ Future<void> initInjector() async {
   sl.registerFactory(() => TasksCubit(tasksRepository: sl()));
 
   sl.registerFactory(() => TasksHistoryCubit(tasksHistoryRepository: sl()));
-
+  sl.registerFactory(() => AppCubit());
   //================================== Repository===============================
 
   sl.registerLazySingleton<CategoriesRepository>(() => CategoriesRepository());

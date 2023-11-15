@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_cubit.dart';
+import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_state.dart';
 import '../../../business_logic/app_cubit/app_cubit.dart';
 import '../../../business_logic/app_cubit/app_cubit_state.dart';
 import '../../widgets/home_widgets/home_bottom_nav_widgets.dart';
@@ -20,29 +22,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppCubitState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var selectIndex = AppCubit.get(context).currentIndex;
-          return Scaffold(
-              bottomNavigationBar: HomeBottomNavigationWidget(
-                selectIndex: selectIndex,
-                onTabChange: (selectIndex) {
-                  AppCubit.get(context).changeIndex(selectIndex);
-                  _page = selectIndex;
-                },
-              ),
-              body: _page == 0
-                  ? TasksHistoryScreen()
-                  : _page == 1
-                      ? CreateTaskScreen()
-                      : _page == 2
-                          ? AddCategoriesScreen()
-                          : Container());
-        },
-      ),
+    return BlocConsumer<AppCubit, AppCubitState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var selectIndex = AppCubit.get(context).currentIndex;
+        return Scaffold(
+            bottomNavigationBar: HomeBottomNavigationWidget(
+              isDark: AppCubit.get(context).isDark,
+              selectIndex: selectIndex,
+              onTabChange: (selectIndex) {
+                AppCubit.get(context).changeIndex(selectIndex);
+                _page = selectIndex;
+              },
+            ),
+            body: _page == 0
+                ? TasksHistoryScreen()
+                : _page == 1
+                    ? CreateTaskScreen()
+                    : _page == 2
+                        ? AddCategoriesScreen()
+                        : Container());
+      },
     );
   }
 }
