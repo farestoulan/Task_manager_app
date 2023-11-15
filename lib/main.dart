@@ -34,6 +34,7 @@ void main() async {
   await Hive.openBox<TasksModel>('Tasks');
 
   bool isDark = CacheHelper.getData(key: 'isDark') ?? false;
+  print('tesst### ::${isDark}');
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

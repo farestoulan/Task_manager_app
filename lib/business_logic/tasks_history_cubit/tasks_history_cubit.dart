@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_history_state.dart';
+import '../../core/network/local/cache_helper.dart';
 import '../../data/models/categories_model/categories_model.dart';
 import '../../data/models/taskes_model/tasks_model.dart';
 import '../../data/repositories/tasks_history_repository/tasks_history_repository.dart';
+import '../../presentation/screens/add_categories_screen/categories_manager_screen.dart';
+import '../../presentation/screens/create_task_screen/create_task_screen.dart';
+import '../../presentation/screens/tasks_history_screen/tasks_history_screen.dart';
 
 class TasksHistoryCubit extends Cubit<TasksHistoryState> {
   final TasksHistoryRepository tasksHistoryRepository;
@@ -11,6 +15,19 @@ class TasksHistoryCubit extends Cubit<TasksHistoryState> {
       : super(TasksHistoryInitial());
 
   static TasksHistoryCubit get(context) => BlocProvider.of(context);
+//=========================== Change Nav Bar Bottom ============================
+
+  var currentIndex = 0;
+  List<Widget> screens = [
+    TasksHistoryScreen(),
+    CreateTaskScreen(),
+    AddCategoriesScreen()
+  ];
+
+  void changeIndex(int index) {
+    currentIndex = index;
+    emit(AppChangeBottomNavBarState());
+  }
 
   //=============================== get Tasks
   void getTasks() {
@@ -232,4 +249,17 @@ class TasksHistoryCubit extends Cubit<TasksHistoryState> {
       emit(GetTasksFilteredError(error: e.toString()));
     }
   }
+
+  // bool isDark = false;
+  // void changeAppMode({bool? isDarkFromShared}) {
+  //   emit(AppChangeModeLoadingState());
+  //   if (isDarkFromShared != null) {
+  //     isDark = isDarkFromShared;
+  //     emit(AppChangeModeState());
+  //   } else {
+  //     isDark = !isDark;
+  //     CacheHelper.putData(key: 'isDark', value: isDark).then((value) {});
+  //     emit(AppChangeModeState());
+  //   }
+  // }
 }

@@ -12,6 +12,15 @@ class AppTheme {
 //=================================== Light Theme Mode
 
   static final ThemeData lightTheme = ThemeData(
+    iconTheme: IconThemeData(
+      color: ColorManager.blackColor,
+    ),
+    // iconButtonTheme: IconButtonTheme.of(context).style.iconColor.resolve(states)
+    // IconButtonThemeData(
+    //     style: ButtonStyle(
+    //         iconColor: MaterialStateColor.resolveWith(
+    //             (states) => ColorManager.primary))),
+    //toggleButtonsTheme: ToggleButtonsThemeData(color: ColorManager.primary),
     scaffoldBackgroundColor: ColorManager.whiteColor,
     appBarTheme: AppBarTheme(
         color: ColorManager.primary,
@@ -41,6 +50,14 @@ class AppTheme {
   );
 //=================================== dark Theme Mode
   static final ThemeData darkTheme = ThemeData(
+    iconTheme: IconThemeData(
+      color: ColorManager.blackColor,
+    ),
+    // iconButtonTheme: IconButtonThemeData(
+    //     style: ButtonStyle(
+    //         iconColor: MaterialStateColor.resolveWith(
+    //             (states) => ColorManager.blackColor))),
+    // toggleButtonsTheme: ToggleButtonsThemeData(color: ColorManager.blackColor),
     scaffoldBackgroundColor: HexColor('333739'),
     appBarTheme: AppBarTheme(
         color: HexColor('333739'),

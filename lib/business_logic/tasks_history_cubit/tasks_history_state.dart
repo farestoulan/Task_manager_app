@@ -6,6 +6,8 @@ class TasksHistoryState {}
 
 class TasksHistoryInitial extends TasksHistoryState {}
 
+class AppChangeBottomNavBarState extends TasksHistoryState {}
+
 //=================== Get Task
 class GetTaksLoading extends TasksHistoryState {}
 
@@ -125,6 +127,12 @@ class GetTasksFilteredError extends TasksHistoryState {
 }
 
 //=================================
-class AppChangeModeLoadinggState extends TasksHistoryState {}
+// class AppChangeModeLoadinggState extends TasksHistoryState {}
 
-class AppChangeModeeState extends TasksHistoryState {}
+// class AppChangeModeeState extends TasksHistoryState {}
+
+// // class AppChangeBottomNavBarState extends TasksHistoryState {}
+
+// class AppChangeModeLoadingState extends TasksHistoryState {}
+
+// class AppChangeModeState extends TasksHistoryState {}

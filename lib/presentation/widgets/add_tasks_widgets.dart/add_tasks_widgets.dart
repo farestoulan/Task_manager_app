@@ -59,6 +59,7 @@ class AddTasksWidgets {
               ),
 //========================== Text Feild Dueo Date
               DatePicker.buildDatePicker(
+                context: context,
                 hintText: AppStrings.addDueDate,
                 togglePassword: () {
                   showDatePicker(
