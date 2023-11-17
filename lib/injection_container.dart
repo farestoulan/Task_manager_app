@@ -6,6 +6,8 @@ import 'package:task_manager_app/business_logic/tasks_history_cubit/tasks_histor
 import 'package:task_manager_app/data/repositories/categories_repository/categories_reposirory.dart';
 import 'package:task_manager_app/data/repositories/tasks_history_repository/tasks_history_repository.dart';
 
+import 'business_logic/search_bloc/search_bloc.dart';
+import 'data/repositories/search_repository/search_repository.dart';
 import 'data/repositories/tasks_repository/tasks_repository.dart';
 
 final sl = GetIt.instance;
@@ -19,6 +21,7 @@ Future<void> initInjector() async {
 
   sl.registerFactory(() => TasksHistoryCubit(tasksHistoryRepository: sl()));
   sl.registerFactory(() => AppCubit());
+  sl.registerFactory(() => SearchBloc(searchRepository: sl()));
   //================================== Repository===============================
 
   sl.registerLazySingleton<CategoriesRepository>(() => CategoriesRepository());
@@ -27,4 +30,6 @@ Future<void> initInjector() async {
 
   sl.registerLazySingleton<TasksHistoryRepository>(
       () => TasksHistoryRepository());
+
+  sl.registerLazySingleton<SearchRepository>(() => SearchRepository());
 }

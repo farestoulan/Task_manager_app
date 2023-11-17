@@ -89,7 +89,10 @@ class _TasksHistoryScreenState extends State<TasksHistoryScreen> {
                     ),
                     actions: [
                       IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.search)),
+                          onPressed: () {
+                            Routes.navigateTo(context, Routes.searchScreen);
+                          },
+                          icon: const Icon(Icons.search)),
                       IconButton(
                           onPressed: () {
                             AppCubit.get(context).changeAppMode();
