@@ -4,6 +4,7 @@ import 'package:task_manager_app/data/models/taskes_model/tasks_model.dart';
 import 'package:task_manager_app/presentation/screens/home/home_screen.dart';
 import 'package:task_manager_app/presentation/screens/tasks_history_screen/tasks_history_screen.dart';
 
+import '../../../presentation/screens/search_screen/search_screen.dart';
 import '../../../presentation/screens/splash_screen/splash_screen.dart';
 import '../../../presentation/screens/task_details_screen/task_details_screen.dart';
 
@@ -17,6 +18,8 @@ class Routes {
   static const String tasksDetailesScreen = '/tasksDetailesScreen';
 
   static const String ditTasksDetailesScreen = '/ditTasksDetailesScreen';
+
+  static const String searchScreen = '/searchScreen';
 
 //================================== navigate and Push
   static void navigateTo(context, String namedRouting) => Navigator.pushNamed(
@@ -104,6 +107,14 @@ class AppRoutes {
                   isEditabel: false,
                 )
               : TaskDetailsScreen(),
+          type: PageTransitionType.leftToRight,
+          settings: routeSettings,
+        );
+
+//======================= Search Screen
+      case Routes.searchScreen:
+        return PageTransition(
+          child: SearchView(),
           type: PageTransitionType.leftToRight,
           settings: routeSettings,
         );

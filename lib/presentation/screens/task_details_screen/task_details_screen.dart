@@ -230,6 +230,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       ),
 //========================== Text Feild Dueo Date
                       DatePicker.buildDatePicker(
+                        context: context,
                         isEditable: widget.isEditabel!,
                         hintText: AppStrings.selectDueDateLabel,
                         togglePassword: () {
@@ -278,6 +279,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
 //========================== Text Feild Date And Time
                       isCheckedReminedMe == true
                           ? DatePicker.buildDatePicker(
+                              context: context,
                               isEditable: widget.isEditabel!,
                               hintText: AppStrings.selectDateAndTime,
                               togglePassword: () async {
