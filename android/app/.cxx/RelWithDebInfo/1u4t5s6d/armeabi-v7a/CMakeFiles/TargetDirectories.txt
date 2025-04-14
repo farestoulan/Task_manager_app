@@ -1,0 +1,2 @@
+F:/singleclic/projects/FIG/Woo-Commerce_FIG_App/android/app/.cxx/RelWithDebInfo/1u4t5s6d/armeabi-v7a/CMakeFiles/edit_cache.dir
+F:/singleclic/projects/FIG/Woo-Commerce_FIG_App/android/app/.cxx/RelWithDebInfo/1u4t5s6d/armeabi-v7a/CMakeFiles/rebuild_cache.dir

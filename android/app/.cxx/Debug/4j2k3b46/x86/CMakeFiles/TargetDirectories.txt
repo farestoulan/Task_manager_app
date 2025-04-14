@@ -1,0 +1,2 @@
+F:/singleclic/projects/FIG/Woo-Commerce_FIG_App/android/app/.cxx/Debug/4j2k3b46/x86/CMakeFiles/edit_cache.dir
+F:/singleclic/projects/FIG/Woo-Commerce_FIG_App/android/app/.cxx/Debug/4j2k3b46/x86/CMakeFiles/rebuild_cache.dir
